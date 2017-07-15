@@ -13,23 +13,27 @@ print "Let's play Battleship!"
 print_board(board)
 
 def random_row(board):
-    return randint(0, len(board) - 1)
+    return randint(1, len(board))
 
 def random_col(board):
-    return randint(0, len(board[0]) - 1)
+    return randint(1, len(board[0]))
 
 ship_row = random_row(board)
 ship_col = random_col(board)
-print ship_row
-print ship_col
-
+#print ship_row
+#print ship_col
+def cheat_code(wanna_cheat):
+    if wanna_cheat == "yes":
+        print "Ship Row: ", ship_row,"and Ship Col: ", ship_col
+    else: 
+        print "Tough Luck Kid!"
 for turn in range(4):
     print "Turn", turn + 1
     
     # Everything from here on should go in your for loop!
     # Be sure to indent four spaces!
-    guess_row = int(raw_input("Guess Row:"))-1
-    guess_col = int(raw_input("Guess Col:"))-1
+    guess_row = int(raw_input("Guess Row:"))
+    guess_col = int(raw_input("Guess Col:"))
     
     if guess_row == ship_row and guess_col == ship_col:
         print "Congratulations! You sunk my battleship!"
@@ -42,10 +46,12 @@ for turn in range(4):
             print "You guessed that one already."
             print_board(board)
         else:
-            
             print "You missed my battleship!"
             board[guess_col][guess_row] = "X"
+            wanna_cheat = raw_input("Wanna Cheat")
             print_board(board)
+            cheat_code(wanna_cheat)
+            
             print 'No of Turns:', (turn + 1) 
     if turn == 3:
         print "Game Over!"
